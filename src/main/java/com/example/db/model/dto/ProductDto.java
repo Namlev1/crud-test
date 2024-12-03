@@ -1,7 +1,5 @@
 package com.example.db.model.dto;
 
-import java.util.List;
-
 public record ProductDto(
         Integer id,
         String name,

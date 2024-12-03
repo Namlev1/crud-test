@@ -3,8 +3,6 @@ package com.example.db.model.converters;
 import com.example.db.model.Product;
 import com.example.db.model.dto.ProductDto;
 
-import java.util.stream.Collectors;
-
 public class ProductConverter {
     public static Product toProduct(ProductDto dto) {
         return Product.builder()

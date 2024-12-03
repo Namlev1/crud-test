@@ -2,11 +2,10 @@ package com.example.db.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.*;
-import org.hibernate.annotations.Cascade;
-
-import java.util.ArrayList;
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
@@ -27,12 +26,12 @@ public class Product {
 
     @Column(nullable = false)
     private double price;
-    
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "details_id", referencedColumnName = "id")
     @JsonManagedReference
     private ProductDetails details;
-    
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     @JsonManagedReference

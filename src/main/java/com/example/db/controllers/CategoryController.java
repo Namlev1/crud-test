@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 public class CategoryController {
     private final CategoryService categoryService;
-    private final ProductService productService;
 
     @GetMapping("/categories")
     public String categories(Model model) {
