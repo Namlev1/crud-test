@@ -1,0 +1,12 @@
+table, th, td {
+    border: 1px solid;
+    border-collapse: collapse;
+    padding: 4px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    gap: 4px;
+}

@@ -2,12 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Home</title>
+    <link th:href="@{/styles.css}" rel="stylesheet"/>
 </head>
 <body>
 <h1>Home</h1>
-<div>
-    <a th:href="@{/products}">Manage Products</a>
-    <a th:href="@{/categories}">Manage Categories</a>
-</div>
+<ul>
+    <li>
+        <a th:href="@{/products}">Manage Products</a>
+    </li>
+    <li>
+        <a th:href="@{/categories}">Manage Categories</a>
+    </li>
+</ul>
 </body>
 </html>
