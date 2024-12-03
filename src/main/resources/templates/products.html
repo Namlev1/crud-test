@@ -13,6 +13,7 @@
         <th>Price</th>
         <th>Manufacturer</th>
         <th>Warranty</th>
+        <th>Category</th>
         <th>Actions</th>
     </tr>
     </thead>
@@ -23,6 +24,7 @@
         <td th:text="${product.price}"></td>
         <td th:text="${product.details.manufacturer}"></td>
         <td th:text="${product.details.warranty}"></td>
+        <td th:text="${product.category.name}"></td>
         <td>
             <a th:href="@{/products/edit/{id}(id=${product.id})}">Edit</a>
             <form th:action="@{/products/delete/{id}(id=${product.id})}" method="post" style="display:inline;">

@@ -5,7 +5,8 @@
 </head>
 <body>
 <h1>Edit Product</h1>
-<form th:action="@{/products}" method="post">
+<form th:action="@{/products/edit}" method="post" th:object="${product}">
+<!--<form th:action="@{/products/edit}" method="post">-->
     <input type="hidden" th:name="id" th:value="${product.id}" />
     <label>Name:</label>
     <input type="text" th:name="name" th:value="${product.name}" required />
@@ -13,6 +14,17 @@
     <input type="text" th:name="description" th:value="${product.description}" />
     <label>Price:</label>
     <input type="number" step="0.01" th:name="price" th:value="${product.price}" required />
+    <!--  Product Details fields-->
+    <input type="hidden" th:name="details.id" th:value="${product.details.id}" />
+    <label for="manufacturer">Manufacturer:</label>
+    <input type="text" id="manufacturer" name="details.manufacturer" th:value="${product.details.manufacturer}" />
+    <label for="warranty">Warranty:</label>
+    <input type="text" id="warranty" name="details.warranty" th:value="${product.details.warranty}" />
+    <!-- Category fields -->
+    <input type="hidden" th:name="category.id" th:value="${product.category.id}" />
+    <label for="category">Category Name:</label>
+    <input type="text" id="category" name="category.name" th:value="${product.category.name}"/>
+
     <button type="submit">Save Changes</button>
 </form>
 </body>

@@ -2,10 +2,7 @@ package com.example.db.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.Cascade;
 
 import java.util.ArrayList;
