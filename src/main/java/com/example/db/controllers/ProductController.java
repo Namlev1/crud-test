@@ -1,6 +1,7 @@
 package com.example.db.controllers;
 
 import com.example.db.model.dto.ProductDto;
+import com.example.db.service.CategoryService;
 import com.example.db.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,10 +15,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;
+    private final CategoryService categoryService;
 
     @GetMapping("/products")
     public String products(Model model) {
         model.addAttribute("products", productService.findAll());
+        model.addAttribute("categories", categoryService.findAll());
         return "products";
     }
 
@@ -36,6 +39,7 @@ public class ProductController {
     @GetMapping("/products/edit/{id}")
     public String editProduct(@PathVariable Integer id, Model model) {
         model.addAttribute("product", productService.findById(id));
+        model.addAttribute("categories", categoryService.findAll());
         return "edit-product";
     }
 
