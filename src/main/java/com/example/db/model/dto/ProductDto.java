@@ -8,6 +8,7 @@ public record ProductDto(
         String description,
         double price,
         ProductDetailsDto details,
-        CategoryDto category,
-        List<TagDto> tags) {
+        CategoryDto category
+//        List<TagDto> tags
+) {
 }

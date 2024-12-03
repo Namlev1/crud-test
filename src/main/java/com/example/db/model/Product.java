@@ -41,13 +41,13 @@ public class Product {
     @JsonManagedReference
     private Category category;
 
-    @ManyToMany
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.MERGE, org.hibernate.annotations.CascadeType.PERSIST})
-    @JoinTable(
-            name = "product_tags",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "tag_id")
-    )
-    @JsonManagedReference
-    private List<Tag> tags = new ArrayList<>();
+//    @ManyToMany
+//    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.MERGE, org.hibernate.annotations.CascadeType.PERSIST})
+//    @JoinTable(
+//            name = "product_tags",
+//            joinColumns = @JoinColumn(name = "product_id"),
+//            inverseJoinColumns = @JoinColumn(name = "tag_id")
+//    )
+//    @JsonManagedReference
+//    private List<Tag> tags = new ArrayList<>();
 }

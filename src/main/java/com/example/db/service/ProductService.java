@@ -40,24 +40,24 @@ public class ProductService {
         if (dto.category().id() != null) {
             category = categoryRepository.findById(dto.category().id()).orElseThrow();
         } else {
-            category = CategoryConverter.toCategory(dto.category());
+            category = categoryRepository.save(CategoryConverter.toCategory(dto.category()));
         }
         product.setCategory(category);
 
-        if (dto.tags() != null) {
-            List<Tag> tags = dto.tags().stream()
-                    .map(tagDto -> {
-                        Tag tag;
-                        if (tagDto.id() != null) {
-                            tag = tagRepository.findById(tagDto.id()).orElseThrow();
-                        } else {
-                            tag = TagConverter.toTag(tagDto);
-                        }
-                        return tag;
-                    })
-                    .collect(Collectors.toList());
-            product.setTags(tags);
-        }
+//        if (dto.tags() != null) {
+//            List<Tag> tags = dto.tags().stream()
+//                    .map(tagDto -> {
+//                        Tag tag;
+//                        if (tagDto.id() != null) {
+//                            tag = tagRepository.findById(tagDto.id()).orElseThrow();
+//                        } else {
+//                            tag = TagConverter.toTag(tagDto);
+//                        }
+//                        return tag;
+//                    })
+//                    .collect(Collectors.toList());
+//            product.setTags(tags);
+//        }
 
         product = productRepository.save(product);
         return ProductConverter.toDto(product);
@@ -89,25 +89,25 @@ public class ProductService {
         }
         product.setCategory(category);
 
-        List<Tag> tags = dto.tags().stream()
-                .map(tagDto -> {
-                    Tag tag;
-                    if (tagDto.id() != null) {
-                        tag = tagRepository.findById(tagDto.id()).orElseThrow();
-                    } else {
-                        tag = TagConverter.toTag(tagDto);
-                    }
-                    return tag;
-                })
-                .collect(Collectors.toList());
-        product.setTags(tags);
+//        List<Tag> tags = dto.tags().stream()
+//                .map(tagDto -> {
+//                    Tag tag;
+//                    if (tagDto.id() != null) {
+//                        tag = tagRepository.findById(tagDto.id()).orElseThrow();
+//                    } else {
+//                        tag = TagConverter.toTag(tagDto);
+//                    }
+//                    return tag;
+//                })
+//                .collect(Collectors.toList());
+//        product.setTags(tags);
 
         product = productRepository.save(product);
         return ProductConverter.toDto(product);
     }
 
     private static boolean isDtoInvalid(ProductDto dto) {
-        return dto.id() == null || dto.category() == null || dto.tags() == null || dto.details() == null;
+        return dto.id() == null || dto.category() == null || dto.details() == null;
     }
 
     public List<ProductDto> findAll() {
@@ -158,7 +158,7 @@ public class ProductService {
         product1.setPrice(15.0);
         product1.setCategory(category1);
         product1.setDetails(details1);
-        product1.setTags(Arrays.asList(tag1, tag2));
+//        product1.setTags(Arrays.asList(tag1, tag2));
 
         Product product2 = new Product();
         product2.setName("p2");
@@ -166,7 +166,7 @@ public class ProductService {
         product2.setPrice(35.0);
         product2.setCategory(category2);
         product2.setDetails(details2);
-        product2.setTags(Arrays.asList(tag1, tag2));
+//        product2.setTags(Arrays.asList(tag1, tag2));
 
         product1 = productRepository.save(product1);
         product2 = productRepository.save(product2);

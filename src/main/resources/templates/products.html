@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Products</title>
+</head>
+<body>
+<h1>Products</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Manufacturer</th>
+        <th>Warranty</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.description}"></td>
+        <td th:text="${product.price}"></td>
+        <td th:text="${product.details.manufacturer}"></td>
+        <td th:text="${product.details.warranty}"></td>
+        <td>
+            <a th:href="@{/products/edit/{id}(id=${product.id})}">Edit</a>
+            <form th:action="@{/products/delete/{id}(id=${product.id})}" method="post" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Add Product</h2>
+<form th:action="@{/products}" method="post">
+    <!-- Product fields -->
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required/>
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description"/>
+    <label for="price">Price:</label>
+    <input type="number" id="price" name="price" step="0.01" required/>
+    <!--  Product Details fields-->
+    <label for="manufacturer">Manufacturer:</label>
+    <input type="text" id="manufacturer" name="details.manufacturer"/>
+    <label for="warranty">Warranty:</label>
+    <input type="text" id="warranty" name="details.warranty"/>
+    <!-- Category fields -->
+    <label for="category">Category Name:</label>
+    <input type="text" id="category" name="category.name"/>
+
+    <button type="submit">Add Product</button>
+</form>
+</body>
+</html>

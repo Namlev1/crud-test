@@ -20,7 +20,7 @@ public class Tag {
 
     private String name;
 
-    @ManyToMany(mappedBy = "tags")
-    @JsonBackReference
-    private List<Product> products = new ArrayList<>();
+//    @ManyToMany(mappedBy = "tags")
+//    @JsonBackReference
+//    private List<Product> products = new ArrayList<>();
 }
