@@ -10,7 +10,6 @@ import com.example.db.model.dto.ProductDto;
 import com.example.db.repository.CategoryRepository;
 import com.example.db.repository.ProductDetailsRepository;
 import com.example.db.repository.ProductRepository;
-import com.example.db.repository.TagRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,9 +22,8 @@ import java.util.stream.Collectors;
 public class ProductService {
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
-    private final TagRepository tagRepository;
     private final ProductDetailsRepository productDetailsRepository;
-
+    
     public ProductDto save(ProductDto dto) {
         Product product = new Product();
         product.setName(dto.name());
@@ -40,21 +38,6 @@ public class ProductService {
             category = categoryRepository.save(CategoryConverter.toCategory(dto.category()));
         }
         product.setCategory(category);
-
-//        if (dto.tags() != null) {
-//            List<Tag> tags = dto.tags().stream()
-//                    .map(tagDto -> {
-//                        Tag tag;
-//                        if (tagDto.id() != null) {
-//                            tag = tagRepository.findById(tagDto.id()).orElseThrow();
-//                        } else {
-//                            tag = TagConverter.toTag(tagDto);
-//                        }
-//                        return tag;
-//                    })
-//                    .collect(Collectors.toList());
-//            product.setTags(tags);
-//        }
 
         product = productRepository.save(product);
         return ProductConverter.toDto(product);
@@ -80,7 +63,6 @@ public class ProductService {
         }
         product.setDetails(details);
 
-        // todo
         Category category;
         if (dto.category().id() != null) {
             category = categoryRepository.findById(dto.category().id()).orElseThrow();

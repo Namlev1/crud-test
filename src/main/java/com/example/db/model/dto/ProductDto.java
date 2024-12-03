@@ -9,6 +9,5 @@ public record ProductDto(
         double price,
         ProductDetailsDto details,
         CategoryDto category
-//        List<TagDto> tags
 ) {
 }

@@ -14,7 +14,6 @@ public class ProductConverter {
                 .price(dto.price())
                 .details(ProductDetailsConverter.toDetails(dto.details()))
                 .category(CategoryConverter.toCategory(dto.category()))
-//                .tags(dto.tags().stream().map(TagConverter::toTag).collect(Collectors.toList()))
                 .build();
     }
 
@@ -26,7 +25,6 @@ public class ProductConverter {
                 product.getPrice(),
                 ProductDetailsConverter.toDto(product.getDetails()),
                 CategoryConverter.toDto(product.getCategory())
-//                product.getTags().stream().map(TagConverter::toDto).collect(Collectors.toList())
         );
     }
 }

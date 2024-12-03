@@ -3,11 +3,8 @@ package com.example.db;
 import com.example.db.model.Category;
 import com.example.db.model.Product;
 import com.example.db.model.ProductDetails;
-import com.example.db.model.Tag;
 import com.example.db.repository.CategoryRepository;
-import com.example.db.repository.ProductDetailsRepository;
 import com.example.db.repository.ProductRepository;
-import com.example.db.repository.TagRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -17,8 +14,6 @@ import org.springframework.stereotype.Component;
 public class StartupRunner implements CommandLineRunner {
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
-    private final TagRepository tagRepository;
-    private final ProductDetailsRepository productDetailsRepository;
 
     @Override
     public void run(String... args) throws Exception {
