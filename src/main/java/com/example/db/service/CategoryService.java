@@ -40,6 +40,17 @@ public class CategoryService {
     }
 
     public void deleteById(Long id) {
+        Category category = categoryRepository.findById(id).orElseThrow();
+        if (category.getProducts() == null || !category.getProducts().isEmpty()) {
+            return;
+        }
         categoryRepository.deleteById(id);
+    }
+
+    public CategoryDto update(CategoryDto dto) {
+        Category category = categoryRepository.findById(dto.id()).orElseThrow();
+        category.setName(dto.name());
+        categoryRepository.save(category);
+        return CategoryConverter.toDto(category);
     }
 }

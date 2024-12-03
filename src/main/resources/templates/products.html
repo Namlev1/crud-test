@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Products</title>
-    <link th:href="@{/styles.css}" rel="stylesheet" />
+    <link th:href="@{/styles.css}" rel="stylesheet"/>
 </head>
 <body>
 <h1>Products</h1>
@@ -50,24 +50,27 @@
     <input type="text" id="manufacturer" name="details.manufacturer"/>
     <label for="warranty">Warranty:</label>
     <input type="text" id="warranty" name="details.warranty"/>
-    
+
     <!-- Category fields -->
-        <label for="categorySelect">Existing Categories:</label>
-        <select id="categorySelect" name="category.id">
-            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
-        </select>
-        <label for="newCategoryName">New Category Name:</label>
-        <input type="text" id="newCategoryName" name="category.name" disabled/>
+    <label for="categorySelect">Existing Categories:</label>
+    <select id="categorySelect" name="category.id">
+        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+    </select>
+    <label for="newCategoryName">New Category Name:</label>
+    <input type="text" id="newCategoryName" name="category.name" disabled/>
     <button type="button" id="toggle-button">Toggle category</button>
 
     <button type="submit">Add Product</button>
 </form>
+
+<a th:href="@{/}">Home</a>
 <script>
     const existingCategory = document.querySelector("#categorySelect");
     const newCategory = document.querySelector("#newCategoryName");
     let current = 'existing'
+
     function toggleCategory() {
-        if(current === 'existing') {
+        if (current === 'existing') {
             existingCategory.disabled = true
             newCategory.disabled = false
             current = 'new'
@@ -77,6 +80,7 @@
             current = 'existing'
         }
     }
+
     document.querySelector('#toggle-button').addEventListener('click', toggleCategory);
 </script>
 </body>

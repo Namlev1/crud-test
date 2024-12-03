@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Categories</title>
+    <link th:href="@{/styles.css}" rel="stylesheet"/>
+</head>
+<body>
+<h1>Categories</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Id</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="category : ${categories}">
+        <td th:text="${category.name}"></td>
+        <td th:text="${category.id}"></td>
+        <td>
+            <a th:href="@{/categories/edit/{id}(id=${category.id})}">Edit</a>
+            <form th:action="@{/categories/delete/{id}(id=${category.id})}" method="post" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Add Category</h2>
+<form th:action="@{/categories}" method="post">
+    <!-- Product fields -->
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required/>
+    <button type="submit">Add Category</button>
+</form>
+<a th:href="@{/}">Home</a>
+</body>
+</html>

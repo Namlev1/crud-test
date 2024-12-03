@@ -2,40 +2,48 @@ package com.example.db.controllers;
 
 import com.example.db.model.dto.CategoryDto;
 import com.example.db.service.CategoryService;
+import com.example.db.service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
-
-@RestController
-@RequestMapping("/api/category")
+@Controller
 @RequiredArgsConstructor
 public class CategoryController {
     private final CategoryService categoryService;
+    private final ProductService productService;
 
-
-    @PostMapping(value = "/")
-    public CategoryDto save(@RequestBody CategoryDto categoryDto) {
-        return categoryService.save(categoryDto);
+    @GetMapping("/categories")
+    public String categories(Model model) {
+        model.addAttribute("categories", categoryService.findAll());
+        return "categories";
     }
 
-    @GetMapping("/all")
-    public List<CategoryDto> getAllCategories() {
-        return categoryService.findAll();
+    @PostMapping("/categories")
+    public String createCategory(@ModelAttribute CategoryDto categoryDto) {
+        categoryService.save(categoryDto);
+        return "redirect:/categories";
     }
 
-    @GetMapping("/id/{id}")
-    public CategoryDto getById(@PathVariable Long id) {
-        return categoryService.findById(id);
-    }
-
-    @GetMapping("/name/{name}")
-    public CategoryDto getByName(@PathVariable String name) {
-        return categoryService.findByName(name);
-    }
-
-    @DeleteMapping("/id/{id}")
-    public void deleteById(@PathVariable Long id) {
+    @PostMapping("/categories/delete/{id}")
+    public String deleteCategory(@PathVariable Long id) {
         categoryService.deleteById(id);
+        return "redirect:/categories";
+    }
+
+    @GetMapping("/categories/edit/{id}")
+    public String editCategory(@PathVariable Long id, Model model) {
+        model.addAttribute("category", categoryService.findById(id));
+        return "edit-category";
+    }
+
+    @PostMapping("/categories/edit")
+    public String updateCategory(@ModelAttribute CategoryDto categoryDto) {
+        categoryService.update(categoryDto);
+        return "redirect:/categories";
     }
 }

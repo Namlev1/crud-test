@@ -21,7 +21,7 @@ public class Category {
 
     private String name;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "category")
     @JsonBackReference
     private List<Product> products = new ArrayList<>();
 }
