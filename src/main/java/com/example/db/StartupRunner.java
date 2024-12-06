@@ -25,11 +25,6 @@ public class StartupRunner implements CommandLineRunner {
                 .warranty("p1 - warranty")
                 .build();
 
-        ProductDetails details2 = ProductDetails.builder()
-                .manufacturer("p2 - manufacturer")
-                .warranty("p2 - warranty")
-                .build();
-
         category1 = categoryRepository.save(category1);
         category2 = categoryRepository.save(category2);
 
@@ -40,14 +35,6 @@ public class StartupRunner implements CommandLineRunner {
         product1.setCategory(category1);
         product1.setDetails(details1);
 
-        Product product2 = new Product();
-        product2.setName("p2");
-        product2.setDescription("p2 Description");
-        product2.setPrice(35.0);
-        product2.setCategory(category2);
-        product2.setDetails(details2);
-
         product1 = productRepository.save(product1);
-        product2 = productRepository.save(product2);
     }
 }
