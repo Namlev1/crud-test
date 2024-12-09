@@ -26,6 +26,12 @@ public class ProductService {
     
     public ProductDto save(ProductDto dto) {
         Product product = new Product();
+        if(dto == null){
+            throw new IllegalArgumentException("dto cannot be null");
+        }
+        if(dto.name() == ""){
+            throw new IllegalArgumentException("Name cannot be empty");
+        }
         product.setName(dto.name());
         product.setDescription(dto.description());
         product.setPrice(dto.price());
@@ -93,6 +99,8 @@ public class ProductService {
     }
 
     public void deleteById(Integer id) {
+
+        Product product = productRepository.findById(id).orElseThrow();
         productRepository.deleteById(id);
     }
 }

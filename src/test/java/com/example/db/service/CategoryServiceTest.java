@@ -22,7 +22,7 @@ class CategoryServiceTest {
     void findAll() {
         List<CategoryDto> categories = categoryService.findAll();
         assertEquals(2, categories.size());
-        assertEquals("p1 - category", categories.getFirst().name());
+        assertEquals("p1 - category", categories.get(0).name());
         assertEquals("p2 - category", categories.get(1).name());
     }
 
