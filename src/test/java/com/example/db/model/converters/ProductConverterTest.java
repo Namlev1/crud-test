@@ -14,7 +14,7 @@ public class ProductConverterTest {
 
     @Test
     void toProduct_validDto_returnsProduct() {
-
+        //Given
         ProductDto dto = new ProductDto(
                 1,
                 "Test Product",
@@ -24,10 +24,10 @@ public class ProductConverterTest {
                 new CategoryDto("Test Category", 1L)
         );
 
-
+        //When
         Product product = ProductConverter.toProduct(dto);
 
-
+        //Then
         assertNotNull(product);
         assertEquals(1, product.getId());
         assertEquals("Test Product", product.getName());
@@ -37,21 +37,21 @@ public class ProductConverterTest {
 
     @Test
     void toProduct_nullDto_throwsException() {
-
+        //Given
         ProductDto dto = null;
 
-
+        //When
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
                 () -> ProductConverter.toProduct(dto)
         );
-
+        //Then
         assertEquals("ProductDto cannot be null", exception.getMessage());
     }
 
     @Test
     void toProduct_nullDetails_throwsException() {
-
+        //Given
         ProductDto dto = new ProductDto(
                 1,
                 "Test Product",
@@ -61,18 +61,18 @@ public class ProductConverterTest {
                 new CategoryDto("Test Ctaegory", 1L)
         );
 
-
+        //When
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
                 () -> ProductConverter.toProduct(dto)
         );
-
+        //Then
         assertEquals("ProductDetails cannot be null in ProductDto", exception.getMessage());
     }
 
     @Test
     void toProduct_nullCategory_throwsException() {
-
+        //Given
         ProductDto dto = new ProductDto(
                 1,
                 "Test Product",
@@ -82,19 +82,19 @@ public class ProductConverterTest {
                 null
         );
 
-
+        //When
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
                 () -> ProductConverter.toProduct(dto)
         );
-
+        //Then
         assertEquals("Category cannot be null in ProductDto", exception.getMessage());
     }
 
 
     @Test
     void toDto_validProduct_returnsDto() {
-
+        //Given
         Product product = Product.builder()
                 .id(1)
                 .name("Test Product")
@@ -107,10 +107,10 @@ public class ProductConverterTest {
                         .build())
                 .build();
 
-
+        //When
         ProductDto dto = ProductConverter.toDto(product);
 
-
+        //Then
         assertNotNull(dto);
         assertEquals(1, dto.id());
         assertEquals("Test Product", dto.name());
@@ -120,21 +120,21 @@ public class ProductConverterTest {
 
     @Test
     void toDto_nullProduct_throwsException() {
-
+        //Given
         Product product = null;
 
-
+        //When
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
                 () -> ProductConverter.toDto(product)
         );
-
+        //Then
         assertEquals("Product cannot be null", exception.getMessage());
     }
 
     @Test
     void toDto_nullDetails_throwsException() {
-
+        //Given
         Product product = Product.builder()
                 .id(1)
                 .name("Test Product")
@@ -147,18 +147,18 @@ public class ProductConverterTest {
                         .build())
                 .build();
 
-
+        //When
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
                 () -> ProductConverter.toDto(product)
         );
-
+        //Then
         assertEquals("ProductDetails cannot be null in Product", exception.getMessage());
     }
 
     @Test
     void toDto_nullCategory_throwsException() {
-
+        //Given
         Product product = Product.builder()
                 .id(1)
                 .name("Test Product")
@@ -168,12 +168,12 @@ public class ProductConverterTest {
                 .category(null)
                 .build();
 
-
+        //When
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
                 () -> ProductConverter.toDto(product)
         );
-
+        //Then
         assertEquals("Category cannot be null in Product", exception.getMessage());
     }
 

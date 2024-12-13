@@ -31,13 +31,13 @@ public class ProductServiceTest {
 
     @Test
     void findAll_emptyRepository_returnsEmptyList() {
-
+        //Given
         productService.deleteById(1);
 
-
+        //When
         List<ProductDto> products = productService.findAll();
 
-
+        //Then
         assertNotNull(products);
         assertTrue(products.isEmpty());
     }
@@ -57,13 +57,14 @@ public class ProductServiceTest {
 
     @Test
     void findById_nullInput() {
+
         InvalidDataAccessApiUsageException exception = assertThrows(
                 InvalidDataAccessApiUsageException.class,
                 () -> productService.findById(null),
                 "Expected findById(null) to throw InvalidDataAccessApiUsageException"
         );
 
-
+        // Verify the exception message
         assertEquals("The given id must not be null", exception.getMessage());
     }
 
@@ -81,7 +82,7 @@ public class ProductServiceTest {
                 "Expected productService.deleteById(999) to throw NoSuchElementException"
         );
 
-
+        // Verify the exception message
         assertEquals("No value present", exception.getMessage());
     }
 
@@ -99,12 +100,13 @@ public class ProductServiceTest {
 
     @Test
     void save_ProductWithNewCategory(){
-
+        //Given
         CategoryDto categoryDto = new CategoryDto("name", null);
         ProductDetailsDto detailsDto = new ProductDetailsDto(null, "manufacturer", "none");
         ProductDto productDto = new ProductDto( null, "testProduct", "testproductDesc", 12, detailsDto, categoryDto);
-
+        //When
         ProductDto saved = productService.save(productDto);
+        //Then
         assertNotNull(saved);
         assertEquals("testProduct", saved.name());
 
@@ -112,7 +114,7 @@ public class ProductServiceTest {
 
     @Test
     void save_validInputWithNewCategory() {
-
+        //Given
         ProductDto dto = new ProductDto(
                 null,
                 "New Product",
@@ -122,10 +124,10 @@ public class ProductServiceTest {
                 new CategoryDto("New Category", null)
         );
 
-
+        //When
         ProductDto result = productService.save(dto);
 
-
+        //Then
         assertNotNull(result);
         assertEquals("New Product", result.name());
         assertEquals("New Category", result.category().name());
@@ -134,7 +136,7 @@ public class ProductServiceTest {
 
     @Test
     void save_validProductWithExistingCategory() {
-
+        //Given
         ProductDto dto = new ProductDto(
                 null,
                 "New Product",
@@ -144,10 +146,10 @@ public class ProductServiceTest {
                 new CategoryDto(null, 1L) // ID istniejącej kategorii
         );
 
-
+        //When
         ProductDto result = productService.save(dto);
 
-
+        //Then
         assertNotNull(result);
         assertEquals(1, result.category().id());
     }
@@ -180,7 +182,7 @@ public class ProductServiceTest {
 
     @Test
     void update_validProduct_with_NewCategory() {
-
+        //Given
         ProductDto dto = new ProductDto(
                 1,
                 "Updated Product",
@@ -190,10 +192,10 @@ public class ProductServiceTest {
                 new CategoryDto("Updated Category", null)
         );
 
-
+        //When
         ProductDto updatedProduct = productService.update(dto);
 
-
+        //Then
         assertNotNull(updatedProduct);
         assertEquals("Updated Product", updatedProduct.name());
         assertEquals("Updated Description", updatedProduct.description());
@@ -205,7 +207,7 @@ public class ProductServiceTest {
 
     @Test
     void update_validProduct_with_Existing_Category() {
-
+        //Given
         ProductDto dto = new ProductDto(
                 1,
                 "Updated Product",
@@ -215,10 +217,10 @@ public class ProductServiceTest {
                 new CategoryDto(null, 2L)
         );
 
-
+        //When
         ProductDto updatedProduct = productService.update(dto);
 
-
+        //Then
         assertNotNull(updatedProduct);
         assertEquals("Updated Product", updatedProduct.name());
         assertEquals("Updated Description", updatedProduct.description());
@@ -229,7 +231,7 @@ public class ProductServiceTest {
 
     @Test
     void update_invalidDto_returnsNull() {
-
+        //Given
         ProductDto dto = new ProductDto(
                 null,
                 null,
@@ -239,16 +241,16 @@ public class ProductServiceTest {
                 new CategoryDto("Category", null)
         );
 
-
+        //When
         ProductDto result = productService.update(dto);
 
-
+        //Then
         assertNull(result);
     }
 
     @Test
     void update_nonExistentProduct_throwsException() {
-
+        //Given
         ProductDto dto = new ProductDto(
                 999,
                 "Product",
